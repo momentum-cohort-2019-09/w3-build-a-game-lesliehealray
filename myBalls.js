@@ -2,25 +2,22 @@ class Game {
     constructor () {
         this.canvas = document.getElementById("myBalls");
         this.screen = this.canvas.getContext("2d");
-        this.rightPressed = false;
-        this.leftPressed = false;
         this.gameOver = false;
         this.bodies = [];
         this.elapsedTime = 0;
         this.playerScore = 0;
         this.computerScore = 0;
-        this.keyboard = new Keyboarder()
+        this.keyboard = new Keyboarder();
 
-        this.player = new Player(this)
-        this.addBody(this.player)
-        
+        this.player = new Player(this);
+        this.addBody(this.player);
 
-        this.ball = new Ball(this)
-        this.addBody(this.ball)
+        this.ball = new Ball(this);
+        this.addBody(this.ball);
     }
       
     addBody (body) {
-        this.bodies.push(body)
+        this.bodies.push(body);
     }
 
     removeBody (body) {
@@ -29,19 +26,19 @@ class Game {
                 return ele.uuid != value;
             });
         }
-        this.bodies = arrayRemove(this.bodies, body.uuid)
-        this.setGameStatus()
-       
+        this.bodies = arrayRemove(this.bodies, body.uuid);
+        this.setGameStatus();
     }
 
     update (){
         this.elapsedTime += 1
+        //add ball about 1 every 2 seconds
         if (this.elapsedTime % 130 === 0){
-            let ball = new Ball(this)
-            this.addBody(ball)
+            let ball = new Ball(this);
+            this.addBody(ball);
         }
         for (let body of this.bodies) {
-            body.update(this)
+            body.update(this);
             if (colliding(this.player, body)) {
                 body.xVelocity *= -1
                 body.yVelocity *= -1
@@ -70,12 +67,12 @@ class Game {
         window.requestAnimationFrame(tick)
         }
     }
-
+    
     tick()
     }
 
     setGameStatus(){
-        if (this.computerScore >= 100){
+        if (this.computerScore >= 99){
             this.gameOver = true;
         }    
     }
